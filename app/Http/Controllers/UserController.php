@@ -94,12 +94,13 @@ class UserController extends Controller
 
         if($count==1){
 
-            Mail::to($email)->send(new OTPMail($otp));
+           Mail::to($email)->send(new OTPMail($otp));
 
             User::where('email','=',$email)->update(['otp'=>$otp]);
             return response()->json([
                 'status' => "success",
-                'message'=>"Authorized"
+                'message'=>"Authorized",
+                //'otp'=>$otp
             ],200);
         }else{
             return response()->json([
@@ -126,8 +127,9 @@ class UserController extends Controller
                 return response()
                         ->json(
                             ['status'=>'success', 
-                            'message'=>" OTP verify Success"
-                        ],200)->cookie('Log-token',$token,60*24*30);;
+                            'message'=>" OTP verify Success",
+                            //'token'=>$token
+                        ],200)->cookie('token',$token,60*24*30);;
             }else {
                 return response()->json(['status' => 'OTP verify fail', 
                 'message' => "verify OTP fail"]);
@@ -145,7 +147,7 @@ class UserController extends Controller
             $email = $request->header('email');
             $password = $request->input('password');
 
-                User::where('email','=',$email)->update(['password'=>$password]);
+            User::where('email','=',$email)->update(['password'=>$password]);
                 
                 return response()
                         ->json(

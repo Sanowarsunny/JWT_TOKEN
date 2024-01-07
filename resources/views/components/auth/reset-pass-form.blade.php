@@ -38,6 +38,7 @@
           hideLoader();
           if(res.status===200 && res.data['status']==='success'){
               successToast(res.data['message']);
+              debugger;
               sessionStorage.clear();
 
               setTimeout(function () {
