@@ -10,7 +10,6 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
-
 class UserController extends Controller
 {
     function LoginPage():View{
